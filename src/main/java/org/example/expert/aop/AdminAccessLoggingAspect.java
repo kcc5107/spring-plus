@@ -4,8 +4,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,13 +21,18 @@ public class AdminAccessLoggingAspect {
 
     private final HttpServletRequest request;
 
-    @After("execution(* org.example.expert.domain.user.controller.UserController.getUser(..))")
-    public void logAfterChangeUserRole(JoinPoint joinPoint) {
+    @Before("execution(* org.example.expert.domain.user.controller.UserAdminController.changeUserRole(..))")
+    public void logBeforeChangeUserRole(JoinPoint joinPoint) {
         String userId = String.valueOf(request.getAttribute("userId"));
         String requestUrl = request.getRequestURI();
         LocalDateTime requestTime = LocalDateTime.now();
 
+        String name = joinPoint.getSignature().getName();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String methodName = signature.getMethod().getName();
+
         log.info("Admin Access Log - User ID: {}, Request Time: {}, Request URL: {}, Method: {}",
-                userId, requestTime, requestUrl, joinPoint.getSignature().getName());
+                userId, requestTime, requestUrl, name);
+        log.info("name: {}, methodName: {}, methodSignatureName: {}", name, methodName, signature.getName());
     }
 }
