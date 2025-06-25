@@ -38,6 +38,5 @@ public class Todo extends Timestamped {
         this.contents = contents;
         this.weather = weather;
         this.user = user;
-        this.managers.add(new Manager(user, this));
     }
 }
