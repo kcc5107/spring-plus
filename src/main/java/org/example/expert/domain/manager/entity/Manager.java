@@ -27,4 +27,9 @@ public class Manager {
     public Manager(User user) {
         this.user = user;
     }
+
+    public Manager(User user, Todo todo) {
+        this.user = user;
+        this.todo = todo;
+    }
 }
