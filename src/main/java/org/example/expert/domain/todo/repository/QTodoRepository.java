@@ -20,7 +20,7 @@ public class QTodoRepository {
         QUser user = QUser.user;
 
 //        return Optional.ofNullable(queryFactory.selectFrom(todo)
-//                .join(todo.user, user)
+//                .join(todo.user, user).fetchJoin()
 //                .where(todo.id.eq(todoId))
 //                .fetchOne());
 
