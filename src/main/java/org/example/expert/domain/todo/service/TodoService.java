@@ -8,6 +8,7 @@ import org.example.expert.domain.manager.entity.Manager;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
+import org.example.expert.domain.todo.dto.response.TodoSearchResponse;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.QTodoRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -79,5 +81,9 @@ public class TodoService {
         }
 
         return resultDto;
+    }
+
+    public Page<TodoSearchResponse> searchTodos(String keyword, LocalDate startTime, LocalDate endTime, String managerNickname, Pageable pageable) {
+        return qTodoRepository.findByFilters(keyword, startTime, endTime, managerNickname, pageable);
     }
 }
