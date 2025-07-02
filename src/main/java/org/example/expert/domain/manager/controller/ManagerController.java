@@ -2,6 +2,7 @@ package org.example.expert.domain.manager.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.expert.domain.common.annotation.SaveLog;
 import org.example.expert.domain.common.dto.CustomUserDetails;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 import org.example.expert.domain.manager.dto.response.ManagerResponse;
@@ -19,6 +20,7 @@ public class ManagerController {
 
     private final ManagerService managerService;
 
+    @SaveLog
     @PostMapping("/todos/{todoId}/managers")
     public ResponseEntity<ManagerSaveResponse> saveManager(
             @AuthenticationPrincipal CustomUserDetails customUserDetails,
@@ -28,11 +30,13 @@ public class ManagerController {
         return ResponseEntity.ok(managerService.saveManager(customUserDetails, todoId, managerSaveRequest));
     }
 
+    @SaveLog
     @GetMapping("/todos/{todoId}/managers")
     public ResponseEntity<List<ManagerResponse>> getMembers(@PathVariable long todoId) {
         return ResponseEntity.ok(managerService.getManagers(todoId));
     }
 
+    @SaveLog
     @DeleteMapping("/todos/{todoId}/managers/{managerId}")
     public void deleteManager(
             @AuthenticationPrincipal CustomUserDetails customUserDetails,
