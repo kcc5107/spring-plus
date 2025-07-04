@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:${MYSQL_PORT}/${MYSQL_DBNAME}?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://plusdb.ch88akokcfdb.ap-northeast-2.rds.amazonaws.com:${MYSQL_PORT}/${MYSQL_DBNAME}?serverTimezone=Asia/Seoul
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
   jpa:
