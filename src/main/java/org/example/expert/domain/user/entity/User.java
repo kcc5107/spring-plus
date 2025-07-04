@@ -3,6 +3,7 @@ package org.example.expert.domain.user.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.example.expert.domain.common.dto.CustomUserDetails;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.user.enums.UserRole;
@@ -21,6 +22,8 @@ public class User extends Timestamped {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    @Setter
+    private String profileImageUrl = "https://jang-spring-plus-bucket.s3.amazonaws.com/profileImages/default.png";
 
     public User(String email, String nickname, String password, UserRole userRole) {
         this.email = email;
